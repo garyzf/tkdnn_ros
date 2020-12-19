@@ -1,0 +1,29 @@
+subscribers:
+
+  camera_reading:
+    #topic: /camera/image_raw
+    topic: /usb_cam/image_raw
+    queue_size: 1
+
+publishers:
+
+  object_detector:
+    topic: /tkdnn_ros/found_object
+    queue_size: 1
+    latch: false
+    
+  bounding_boxes:
+    topic: /tkdnn_ros/bounding_boxes
+    queue_size: 1
+    latch: false
+
+  detection_image:
+    topic: /tkdnn_ros/detection_image
+    queue_size: 1
+    latch: true
+
+image_view:
+
+  enable_opencv: false
+  wait_key_delay: 1
+  enable_console_output: true

@@ -1,0 +1,21 @@
+<launch>
+    <!-- Config and weights folder. -->
+    <arg name="network_config_debugpath"          default="$(find tkdnn_ros)/yolo_network_config/debug"/>
+    <arg name="network_config_layerspath"         default="$(find tkdnn_ros)/yolo_network_config/layers"/>
+    <arg name="network_config_netpath"            default="$(find tkdnn_ros)/yolo_network_config"/>
+
+    <!-- ROS and network parameter files -->
+    <arg name="ros_param_file"                    default="$(find tkdnn_ros)/cfg/ros.yaml"/>
+    <arg name="network_param_file"                default="$(find tkdnn_ros)/cfg/yolov4.yaml"/>
+
+    <!-- Load parameters -->
+    <rosparam command="load" ns="tkdnn_ros" file="$(arg ros_param_file)"/>
+    <rosparam command="load" ns="tkdnn_ros" file="$(arg network_param_file)"/>
+
+    <node pkg="tkdnn_ros" type="tkdnn_ros" name="tkdnn_ros"   output="screen"  respawn="false">
+        <param name="debug_path"          value="$(arg network_config_debugpath)" />
+        <param name="layers_path"         value="$(arg network_config_layerspath)" />   
+        <param name="net_path"            value="$(arg network_config_netpath)" /> 
+    </node>
+
+</launch>
